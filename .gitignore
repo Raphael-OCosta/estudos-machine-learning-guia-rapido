@@ -1,0 +1,28 @@
+# ambiente local
+.venv/
+__pycache__/
+.ipynb_checkpoints/
+README_autor.md
+.gitignore_autor
+# arquivos do repositório original do autor (sem licença aberta): ficam só na máquina
+/ch03.ipynb
+/ch04.ipynb
+/ch05.ipynb
+/ch06.ipynb
+/ch07.ipynb
+/ch08.ipynb
+/ch09.ipynb
+/ch10.ipynb
+/ch11.ipynb
+/ch12.ipynb
+/ch13.ipynb
+/ch14.ipynb
+/ch15.ipynb
+/ch16.ipynb
+/ch17.ipynb
+/ch18.ipynb
+/ch19.ipynb
+# notebooks derivados do código do autor e dados baixados: ficam só na máquina
+/estudos/cap*.ipynb
+/praticar/
+/dados/

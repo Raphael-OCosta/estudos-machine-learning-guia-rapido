@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Guia de Estudos ML</title>
+<style>
+  @page { size: A4; margin: 16mm 15mm 18mm 15mm; }
+  :root {
+    --ink: #1f2933; --muted: #5b6b7a; --line: #e3e8ee;
+    --brand: #2f5d8a; --brand-soft: #eaf1f8;
+    --green: #2e7d5b; --green-soft: #e8f5ee;
+    --amber: #a86b00; --amber-soft: #fff5df;
+    --red: #b03a3a; --red-soft: #fdecec;
+    --code-bg: #f4f6f8;
+  }
+  * { box-sizing: border-box; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { font-family: "Segoe UI", Calibri, Arial, sans-serif; color: var(--ink); font-size: 11pt; line-height: 1.55; margin: 0; background: #fff; }
+  h1, h2, h3 { color: var(--brand); line-height: 1.25; }
+  h2 { font-size: 18pt; margin: 0 0 4mm; padding-bottom: 2mm; border-bottom: 2px solid var(--brand-soft); }
+  h3 { font-size: 13pt; margin: 6mm 0 2mm; }
+  p { margin: 0 0 3mm; }
+  code, .mono { font-family: Consolas, "Cascadia Mono", monospace; font-size: 9.5pt; background: var(--code-bg); padding: 0.5px 4px; border-radius: 3px; }
+  pre { font-family: Consolas, "Cascadia Mono", monospace; font-size: 10pt; background: #1e2a36; color: #e6edf3; padding: 3.5mm 4.5mm; border-radius: 6px; margin: 2mm 0 3mm; white-space: pre-wrap; break-inside: avoid; }
+  pre .c { color: #8fb3a0; }
+  pre .k { color: #7fb8ff; font-weight: 600; }
+  kbd { font-family: "Segoe UI", sans-serif; font-size: 9pt; border: 1px solid #c9d2db; border-bottom-width: 2px; border-radius: 4px; padding: 0 5px; background: #fafbfc; white-space: nowrap; }
+  b, strong { color: #13202b; }
+  .page-break { break-before: page; }
+  section { margin-bottom: 7mm; }
+
+  /* Capa */
+  .cover { height: 255mm; display: flex; flex-direction: column; justify-content: space-between; }
+  .cover-top { background: linear-gradient(135deg, #2f5d8a, #3f7cb0); color: #fff; border-radius: 10px; padding: 18mm 14mm 16mm; }
+  .cover-top .tag { font-size: 10pt; letter-spacing: 2px; text-transform: uppercase; opacity: .85; }
+  .cover-top h1 { color: #fff; font-size: 32pt; margin: 4mm 0 3mm; }
+  .cover-top .sub { font-size: 13pt; opacity: .95; }
+  .cover-how { display: grid; grid-template-columns: 1fr 1fr; gap: 5mm; }
+  .cover-how .box { border: 1px solid var(--line); border-radius: 8px; padding: 5mm; }
+  .cover-how .box .n { display: inline-block; width: 8mm; height: 8mm; border-radius: 50%; background: var(--brand); color: #fff; text-align: center; line-height: 8mm; font-weight: 700; margin-right: 2mm; }
+  .cover-how .box h3 { margin: 0 0 2mm; display: flex; align-items: center; }
+  .toc { border-left: 4px solid var(--brand); padding: 2mm 0 2mm 5mm; }
+  .toc div { padding: 1mm 0; border-bottom: 1px dotted var(--line); display: flex; justify-content: space-between; }
+  .toc div span:last-child { color: var(--muted); }
+  .paths { font-size: 9.5pt; color: var(--muted); }
+
+  /* Tabelas */
+  .compact td, .compact th { padding: 1.4mm 2.5mm; font-size: 9pt; }
+  table { width: 100%; border-collapse: collapse; margin: 2mm 0 4mm; font-size: 10pt; break-inside: auto; }
+  th { background: var(--brand); color: #fff; text-align: left; padding: 2mm 3mm; font-weight: 600; }
+  td { padding: 2mm 3mm; border-bottom: 1px solid var(--line); vertical-align: top; }
+  tr { break-inside: avoid; }
+  tbody tr:nth-child(even) td { background: #f8fafc; }
+
+  /* Cartões de glossário */
+  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 3.5mm; margin: 3mm 0; }
+  .card { border: 1px solid var(--line); border-radius: 8px; padding: 3.5mm 4mm; break-inside: avoid; }
+  .card .t { font-weight: 700; color: var(--brand); font-size: 11.5pt; }
+  .card .a { color: var(--muted); font-size: 9.5pt; font-style: italic; }
+
+  /* Passos */
+  .steps { counter-reset: s; list-style: none; padding: 0; margin: 2mm 0 4mm; }
+  .steps > li { counter-increment: s; position: relative; padding: 0 0 2.5mm 11mm; break-inside: avoid; }
+  .steps > li::before { content: counter(s); position: absolute; left: 0; top: 0.3mm; width: 7mm; height: 7mm; border-radius: 50%; background: var(--brand-soft); color: var(--brand); font-weight: 700; font-size: 10pt; text-align: center; line-height: 7mm; }
+  .steps ul { margin: 1mm 0 0; padding-left: 5mm; }
+  .see { display: block; margin-top: 1mm; color: var(--green); font-size: 10pt; }
+  .see::before { content: "✔ Você deve ver: "; font-weight: 700; }
+
+  .step-head { display: flex; align-items: center; gap: 3mm; margin: 6mm 0 2mm; break-after: avoid; }
+  .step-head .badge { background: var(--brand); color: #fff; font-weight: 700; border-radius: 6px; padding: 1mm 3mm; font-size: 11pt; }
+  .step-head h3 { margin: 0; }
+
+  /* Avisos */
+  .note { border-radius: 8px; padding: 3.5mm 4.5mm; margin: 3mm 0 4mm; break-inside: avoid; border-left: 5px solid; }
+  .note .h { font-weight: 700; margin-bottom: 1mm; display: block; }
+  .tip { background: var(--green-soft); border-color: var(--green); }
+  .tip .h { color: var(--green); }
+  .warn { background: var(--amber-soft); border-color: var(--amber); }
+  .warn .h { color: var(--amber); }
+  .info { background: var(--brand-soft); border-color: var(--brand); }
+  .info .h { color: var(--brand); }
+
+  /* Rotina */
+  .timeline { display: grid; grid-template-columns: 22mm 1fr; gap: 0; margin: 3mm 0 4mm; }
+  .timeline .tm { background: var(--brand); color: #fff; font-weight: 700; text-align: center; padding: 3mm 0; border-bottom: 1px solid #fff; }
+  .timeline .tx { padding: 3mm 4mm; border-bottom: 1px solid var(--line); background: #fbfcfd; }
+  .timeline .tx b { color: var(--brand); }
+
+  .checklist { list-style: none; padding: 0; }
+  .checklist li { padding-left: 7mm; position: relative; margin-bottom: 1.5mm; }
+  .checklist li::before { content: "☐"; position: absolute; left: 0; color: var(--brand); font-size: 12pt; line-height: 1.2; }
+  footer { color: var(--muted); font-size: 9pt; text-align: center; margin-top: 8mm; }
+</style>
+
+<!-- ============ CAPA ============ -->
+<div class="cover">
+  <div class="cover-top">
+    <div class="tag">Guia de estudos</div>
+    <h1>Machine Learning<br>Guia de Referência Rápida</h1>
+    <div class="sub">Livro de Matt Harrison (O'Reilly / Novatec) — praticando com <b style="color:#fff">VS Code</b> e <b style="color:#fff">Jupyter</b></div>
+  </div>
+
+  <div class="cover-how">
+    <div class="box">
+      <h3><span class="n">1</span>Uma única vez</h3>
+      Abra a pasta, escolha o ambiente Python certo e rode a primeira célula. Leva uns 10 minutos.<br><span style="color:var(--muted)">→ Parte 1</span>
+    </div>
+    <div class="box">
+      <h3><span class="n">2</span>Todo dia</h3>
+      Siga a rotina de 60 minutos: ler, rodar célula por célula, mexer nos números e anotar.<br><span style="color:var(--muted)">→ Parte 2</span>
+    </div>
+  </div>
+
+  <div class="toc">
+    <div><span>O que é cada coisa</span><span>pág. 2</span></div>
+    <div><span>Parte 1 — Primeira vez</span><span>pág. 3</span></div>
+    <div><span>Parte 2 — Rotina de cada sessão (60 min)</span><span>pág. 5</span></div>
+    <div><span>Mapa dos capítulos: página do PDF e notebook</span><span>pág. 6</span></div>
+    <div><span>Exemplo completo: primeira aula (Capítulo 3)</span><span>pág. 7</span></div>
+    <div><span>O que mudou desde o livro (2019)</span><span>pág. 8</span></div>
+    <div><span>Células que não rodam hoje</span><span>pág. 9</span></div>
+    <div><span>Atalhos e quando algo der errado</span><span>pág. 10</span></div>
+  </div>
+
+  <div class="paths">
+    <b>Pasta do curso:</b> <code>C:\estudos\ml_pocket_reference</code><br>
+    <b>Onde você escreve:</b> <code>C:\estudos\ml_pocket_reference\praticar\</code> (um caderno vazio por capítulo)<br>
+    <b>Onde você consulta:</b> <code>…\estudos\</code> (código pronto) e <code>ch03…ch19.ipynb</code> (resultados do autor)<br>
+    <b>Livro:</b> <code>OneDrive\Livros\Ebooks Data Science\Machine Learning – Guia de Referência Rápida….pdf</code>
+  </div>
+</div>
+
+<!-- ============ GLOSSÁRIO ============ -->
+<section class="page-break">
+  <h2>O que é cada coisa</h2>
+  <p>No livro de SQL você escrevia consultas em arquivos <code>.sql</code>. Agora o código é <b>Python</b> e roda em <b>notebooks</b>: arquivos divididos em <i>células</i>, que você executa uma por vez e vê o resultado logo abaixo, inclusive gráficos.</p>
+
+  <div class="cards">
+    <div class="card"><div class="t">📘 O livro (PDF)</div>Explica cada técnica e mostra o código. É uma <b>referência</b>: pouca teoria, muitos exemplos.<div class="a">É o professor.</div></div>
+    <div class="card"><div class="t">✍️ Pasta <code>praticar</code></div><b>Onde você escreve.</b> Um caderno por capítulo com a preparação pronta e, para cada seção do livro, um título com a página do PDF e uma célula vazia.<div class="a">É o seu caderno.</div></div>
+    <div class="card"><div class="t">📂 Pasta <code>estudos</code></div><b>Consulta:</b> o código do livro completo, já ajustado para rodar hoje. Use quando travar.<div class="a">É a resolução comentada.</div></div>
+    <div class="card"><div class="t">🗂️ Arquivos <code>ch03…ch19</code></div>Os notebooks <b>originais do autor</b>, com as saídas dele. Não rode: servem para comparar o seu resultado com o dele.<div class="a">É o gabarito (só para olhar).</div></div>
+    <div class="card"><div class="t">🐍 Ambiente <code>.venv</code></div>Um Python 3.12 só deste curso, com todas as bibliotecas do livro já instaladas.<div class="a">É a caixa de ferramentas.</div></div>
+    <div class="card"><div class="t">📊 Pasta <code>dados</code></div><code>titanic3.xls</code> (passageiros do Titanic, cap. 3–13 e 17–19) e <code>boston.csv</code> (preço de casas, cap. 14–16).<div class="a">É o material da aula.</div></div>
+  </div>
+
+  <div class="note info"><span class="h">As principais bibliotecas (você vai ver estes nomes o tempo todo)</span>
+    <table style="margin:1mm 0 0">
+      <thead><tr><th>Nome no código</th><th>Para que serve</th></tr></thead>
+      <tbody>
+        <tr><td><code>pandas</code> (<code>pd</code>)</td><td>Tabelas de dados — é o “Excel/SQL” do Python</td></tr>
+        <tr><td><code>sklearn</code> (scikit-learn)</td><td>Os modelos de machine learning, a divisão treino/teste e as métricas</td></tr>
+        <tr><td><code>matplotlib</code> / <code>seaborn</code></td><td>Gráficos</td></tr>
+        <tr><td><code>yellowbrick</code></td><td>Gráficos prontos para avaliar modelos (matriz de confusão, curva ROC…)</td></tr>
+        <tr><td><code>xgboost</code> / <code>lightgbm</code> / <code>catboost</code></td><td>Modelos de árvores turbinados — os mais usados no mercado para dados em tabela</td></tr>
+        <tr><td><code>shap</code> / <code>lime</code></td><td>Explicam <i>por que</i> o modelo previu aquilo</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</section>
+
+<!-- ============ PARTE 1 ============ -->
+<section class="page-break">
+  <h2>Parte 1 — Primeira vez <span style="font-size:11pt;color:var(--muted);font-weight:400">(uns 10 minutos, só uma vez)</span></h2>
+
+  <div class="step-head"><span class="badge">1.1</span><h3>Abrir a pasta do curso no VS Code</h3></div>
+  <ol class="steps">
+    <li>No VS Code, clique em <b>File → Open Folder…</b> e escolha <code>C:\estudos\ml_pocket_reference</code>.</li>
+    <li>Se perguntar <i>“Do you trust the authors…?”</i>, clique em <b>Yes, I trust the authors</b>.</li>
+    <li>Confira o canto inferior esquerdo: se aparecer <b>Restricted Mode</b>, clique nele → <b>Trust</b> (igual ao curso de SQL).
+      <span class="see">no Explorer, as pastas <code>.venv</code>, <code>dados</code>, <code>estudos</code> e os arquivos <code>ch03.ipynb</code>…<code>ch19.ipynb</code>.</span></li>
+  </ol>
+
+  <div class="step-head"><span class="badge">1.2</span><h3>Abrir o primeiro notebook e escolher o ambiente (kernel)</h3></div>
+  <ol class="steps">
+    <li>No Explorer, abra <code>praticar → cap03_classificacao_titanic_visao_geral.ipynb</code>.</li>
+    <li>No canto <b>superior direito</b> do notebook há um botão <b>Select Kernel</b> (ou o nome de um Python). Clique nele.</li>
+    <li>Escolha <b>Python Environments…</b> e depois <b>.venv (Python 3.12)</b> — o caminho termina em <code>ml_pocket_reference\.venv\Scripts\python.exe</code>.
+      <ul><li>Se a lista não mostrar o <code>.venv</code>, aperte <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> → <code>Reload Window</code> e tente de novo.</li></ul>
+      <span class="see">no canto superior direito, <b>.venv (Python 3.12.x)</b>.</span></li>
+  </ol>
+  <div class="note warn"><span class="h">⚠ O kernel certo é o que faz tudo funcionar</span>
+    Se escolher outro Python (por exemplo o 3.13 do computador), as bibliotecas do livro não vão estar lá e aparece <code>ModuleNotFoundError</code>. O VS Code lembra a escolha: você só faz isso uma vez por notebook.
+  </div>
+
+  <div class="step-head"><span class="badge">1.3</span><h3>Rodar as primeiras células</h3></div>
+  <ol class="steps">
+    <li>Clique na célula de código da seção <b>Preparação</b> (começa com <code>import sys</code>) e aperte <kbd>Shift</kbd>+<kbd>Enter</kbd>.
+      <span class="see">um ✔ verde à esquerda da célula e o cursor pulando para a próxima.</span></li>
+    <li>Na seção <b>Importações · PDF p. 24</b>, digite na célula vazia as importações do livro (<code>import pandas as pd</code> etc.) e rode.</li>
+    <li>Na seção <b>Colete os dados · PDF p. 27</b>, digite <code>df = pd.read_excel(url)</code> e, na linha de baixo, <code>df.shape</code>. Rode.
+      <span class="see"><code>(1309, 14)</code> — 1.309 passageiros e 14 colunas.</span></li>
+  </ol>
+</section>
+
+<section class="page-break">
+  <div class="note info" style="margin-top:0"><span class="h">Como funciona uma célula</span>
+    Cada célula guarda o que você calculou na <b>memória</b> (o kernel). Por isso a ordem importa: se pular a célula que cria o <code>df</code>, as seguintes dão <code>NameError</code>. Na dúvida, use <b>Restart</b> (barra do notebook) e depois <b>Run All</b> até onde você estava.
+  </div>
+
+  <div class="step-head"><span class="badge">1.4</span><h3>Consultar quando travar</h3></div>
+  <ol class="steps">
+    <li>Travou numa seção? Abra <code>estudos → cap03_…</code> (mesmo nome do seu caderno) ao lado: clique com o botão direito na aba → <b>Split Right</b>. Lá está o código pronto.</li>
+    <li>Para ver o <b>resultado</b> que o autor obteve, abra o <code>ch03.ipynb</code> (na raiz da pasta).</li>
+    <li>Compare as saídas. Números <b>levemente diferentes</b> são normais: as bibliotecas mudaram desde 2019 e alguns modelos têm sorteio aleatório.</li>
+    <li><b>Não rode o original</b>: ele aponta para o link antigo dos dados, que saiu do ar.</li>
+  </ol>
+
+  <div class="step-head"><span class="badge">1.5</span><h3>Criar suas anotações dentro do notebook</h3></div>
+  <ol class="steps">
+    <li>Passe o mouse entre duas células: aparecem os botões <b>+ Code</b> e <b>+ Markdown</b>.</li>
+    <li>Clique em <b>+ Markdown</b>, escreva com suas palavras o que entendeu e aperte <kbd>Shift</kbd>+<kbd>Enter</kbd>.</li>
+    <li>Use <b>+ Code</b> para testar variações sem estragar o exemplo do livro.</li>
+    <li>Salve com <kbd>Ctrl</kbd>+<kbd>S</kbd>.</li>
+  </ol>
+
+  <div class="note tip"><span class="h">✔ Pronto para começar? Confira:</span>
+    <ul class="checklist" style="margin:1mm 0 0">
+      <li>A pasta abre sem <b>Restricted Mode</b>.</li>
+      <li>O notebook mostra <b>.venv (Python 3.12)</b> no canto superior direito.</li>
+      <li>A célula <b>Preparação</b> rodou com ✔ verde.</li>
+      <li><code>df.shape</code> mostrou <code>(1309, 14)</code>.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ PARTE 2 ============ -->
+<section class="page-break">
+  <h2>Parte 2 — Rotina de cada sessão <span style="font-size:11pt;color:var(--muted);font-weight:400">(60 minutos)</span></h2>
+
+  <div class="timeline">
+    <div class="tm">5 min</div><div class="tx"><b>Preparar.</b> PDF na página do capítulo (tabela da próxima página). No VS Code, abra o <code>capXX</code> do dia, confira o kernel <b>.venv</b> e rode as primeiras células (imports e dados).</div>
+    <div class="tm">15 min</div><div class="tx"><b>Ler</b> uma seção, por exemplo “Árvore de decisão”. Foque em <i>o que</i> a técnica faz e <i>quando</i> usar — o livro é direto.</div>
+    <div class="tm">25 min</div><div class="tx"><b>Digitar e entender.</b> No seu caderno de <code>praticar</code>, digite o código da seção (sem copiar e colar) e rode com <kbd>Shift</kbd>+<kbd>Enter</kbd>. Travou? Olhe o <code>estudos/capXX</code>. Para cada resultado, pergunte: o que é isto? Depois <b>mude um parâmetro</b> (ex.: <code>max_depth=3</code> → <code>5</code>) e veja o que acontece com a nota do modelo.</div>
+    <div class="tm">10 min</div><div class="tx"><b>Testar.</b> Numa célula nova, faça uma pergunta sua aos dados (ex.: “mulheres sobreviveram mais?” → <code>df.groupby("sex").survived.mean()</code>).</div>
+    <div class="tm">5 min</div><div class="tx"><b>Anotar.</b> Uma célula Markdown com o que aprendeu e as dúvidas. Salve (<kbd>Ctrl</kbd>+<kbd>S</kbd>).</div>
+  </div>
+
+  <div class="note info"><span class="h">Ritmo sugerido</span>Capítulos curtos (4, 5, 9, 11, 19) cabem em uma sessão. O capítulo 10 (Classificação, 42 páginas) vale ~6 sessões: um modelo por dia. O livro todo sai em cerca de 7 semanas.</div>
+
+  <div class="note warn"><span class="h">Os capítulos 3 a 13 seguem uma história só</span>
+    Quase todos usam o Titanic e repetem no começo as mesmas funções (<code>tweak_titanic</code>, <code>get_train_test_X_y</code>). Isso é proposital: cada notebook roda sozinho. Você não precisa estudar essas funções toda vez — entenda bem no capítulo 3.
+  </div>
+
+  <div class="note tip"><span class="h">Você não precisa saber tudo de Python antes</span>
+    O livro supõe algum Python. Se travar numa linha, rode-a sozinha, olhe o resultado e anote a dúvida. O SQL que você acabou de estudar ajuda muito: <code>df[df.age &gt; 30]</code> é um <code>WHERE</code>, e <code>df.groupby("sex").mean()</code> é um <code>GROUP BY</code>.
+  </div>
+</section>
+
+<section class="page-break">
+  <h2>Mapa dos capítulos</h2>
+  <p>Para cada capítulo: em que página do PDF ele começa, qual notebook abrir e quais dados ele usa.</p>
+  <table>
+    <thead><tr><th>Capítulo</th><th>Pág. PDF</th><th>Caderno (mesmo nome em praticar e estudos)</th><th>Dados</th></tr></thead>
+    <tbody>
+      <tr><td>1 · Introdução (instalação)</td><td>16</td><td colspan="2" style="color:var(--muted)">só leitura — o ambiente já está pronto</td></tr>
+      <tr><td>2 · Visão geral do processo</td><td>22</td><td colspan="2" style="color:var(--muted)">só leitura (CRISP-DM)</td></tr>
+      <tr><td><b>3 · Classificação: Titanic</b></td><td>24</td><td><code>cap03_classificacao_titanic…</code></td><td>Titanic</td></tr>
+      <tr><td><b>4 · Dados ausentes</b></td><td>51</td><td><code>cap04_dados_ausentes</code></td><td>Titanic</td></tr>
+      <tr><td><b>5 · Limpeza dos dados</b></td><td>58</td><td><code>cap05_limpeza_dos_dados</code></td><td>Titanic</td></tr>
+      <tr><td><b>6 · Explorando os dados</b></td><td>61</td><td><code>cap06_explorando_os_dados</code></td><td>Titanic</td></tr>
+      <tr><td><b>7 · Pré-processamento</b></td><td>79</td><td><code>cap07_pre_processamento</code></td><td>Titanic</td></tr>
+      <tr><td><b>8 · Seleção de atributos</b></td><td>90</td><td><code>cap08_selecao_de_atributos</code></td><td>Titanic</td></tr>
+      <tr><td><b>9 · Classes desbalanceadas</b></td><td>98</td><td><code>cap09_classes_desbalanceadas</code></td><td>Titanic</td></tr>
+      <tr><td><b>10 · Classificação</b> (vários modelos)</td><td>103</td><td><code>cap10_classificacao</code></td><td>Titanic</td></tr>
+      <tr><td><b>11 · Seleção do modelo</b></td><td>145</td><td><code>cap11_selecao_do_modelo</code></td><td>Titanic</td></tr>
+      <tr><td><b>12 · Métricas de classificação</b></td><td>149</td><td><code>cap12_metricas_de_classificacao</code></td><td>Titanic</td></tr>
+      <tr><td><b>13 · Explicando os modelos</b></td><td>165</td><td><code>cap13_explicando_os_modelos</code></td><td>Titanic</td></tr>
+      <tr><td><b>14 · Regressão</b></td><td>178</td><td><code>cap14_regressao</code></td><td>Boston</td></tr>
+      <tr><td><b>15 · Métricas de regressão</b></td><td>209</td><td><code>cap15_metricas_de_regressao</code></td><td>Boston</td></tr>
+      <tr><td><b>16 · Explicando regressão</b></td><td>217</td><td><code>cap16_explicando_modelos_de_regressao</code></td><td>Boston</td></tr>
+      <tr><td><b>17 · Redução de dimensionalidade</b></td><td>223</td><td><code>cap17_reducao_de_dimensionalidade</code></td><td>Titanic</td></tr>
+      <tr><td><b>18 · Clustering</b></td><td>254</td><td><code>cap18_clustering</code></td><td>Titanic</td></tr>
+      <tr><td><b>19 · Pipelines</b></td><td>268</td><td><code>cap19_pipelines</code></td><td>Titanic e Boston</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:9.5pt;color:var(--muted)">“Pág. PDF” é o número que o leitor de PDF mostra. Capítulo 10 por seção: regressão logística p. 104 · Naive Bayes 108 · SVM 110 · KNN 113 · árvore de decisão 115 · floresta aleatória 123 · XGBoost 127 · LightGBM 136 · TPOT 141.</p>
+</section>
+
+<!-- ============ EXEMPLO ============ -->
+<section class="page-break">
+  <h2>Exemplo completo: primeira aula do Capítulo 3</h2>
+  <p>O capítulo 3 mostra o processo inteiro de ponta a ponta. Os outros capítulos aprofundam cada passo.</p>
+
+  <ol class="steps">
+    <li><b>Preparar:</b> PDF na <b>página 24</b>. Abra <code>praticar → cap03_classificacao_titanic_visao_geral.ipynb</code> com o kernel <b>.venv</b>.</li>
+    <li><b>Páginas 25–26:</b> rode a <b>Preparação</b> e digite as importações na seção <b>Importações</b>. Leia “Faça uma pergunta”: queremos prever se um passageiro <b>sobreviveu</b> (classificação).</li>
+    <li><b>Página 27</b>, seção <b>Colete os dados</b>: digite e rode
+<pre>df = pd.read_excel(url)
+df.dtypes</pre>
+      <span class="see">a lista das 14 colunas e o tipo de cada uma (int, float, object).</span></li>
+    <li><b>Explore com suas perguntas</b> (o seu SQL em Python):
+<pre>df.survived.mean()                 <span class="c"># % que sobreviveu</span>
+df.groupby(<span class="k">"sex"</span>).survived.mean()  <span class="c"># GROUP BY sex</span>
+df[df.age &lt; 10].shape              <span class="c"># WHERE age &lt; 10</span></pre></li>
+    <li><b>Mais adiante no capítulo:</b> o livro treina um modelo e mede a nota com <code>.score(X_test, y_test)</code>. Anote o valor e compare com o <code>ch03.ipynb</code> do autor.</li>
+    <li><b>Anotar</b> numa célula Markdown:
+<pre><span class="c">Aprendi: classificação prevê uma categoria (sobreviveu sim/não).</span>
+<span class="c">Treino x teste: o modelo aprende com 70% e é avaliado nos 30% que nunca viu.</span>
+<span class="c">Dúvida: ...</span></pre></li>
+  </ol>
+
+  <div class="note tip"><span class="h">Regra de ouro dos notebooks</span>
+    Rode as células <b>em ordem</b>, de cima para baixo. Se algo estranho acontecer, <b>Restart</b> + <b>Run All</b> resolve a maioria dos casos.
+  </div>
+</section>
+
+<!-- ============ ADAPTAÇÕES ============ -->
+<section class="page-break">
+  <h2>O que mudou desde o livro (2019)</h2>
+  <p>O livro usa bibliotecas de 2019. Os notebooks da pasta <code>estudos</code> já vêm ajustados; esta página explica as diferenças para você não estranhar quando o código do livro e o do notebook não forem idênticos.</p>
+    <table class="compact">
+    <thead><tr><th style="width:24%">No livro</th><th style="width:30%">No notebook de estudo</th><th>Por quê</th></tr></thead>
+    <tbody>
+      <tr><td>Link <code>biostat.mc.vanderbilt.edu/…/titanic3.xls</code></td><td><code>url = compat.TITANIC</code> (arquivo em <code>dados/</code>)</td><td>O link do livro saiu do ar.</td></tr>
+      <tr><td><code>load_boston()</code></td><td><code>from compat import load_boston</code></td><td>Removido do scikit-learn 1.2 (lê <code>dados/boston.csv</code>, mesmos dados).</td></tr>
+      <tr><td><code>import pandas_profiling</code></td><td><code>import ydata_profiling as pandas_profiling</code></td><td>A biblioteca mudou de nome.</td></tr>
+      <tr><td><code>"max_features": "auto"</code></td><td><code>"max_features": "sqrt"</code></td><td>"auto" foi removido; para classificação era o mesmo que "sqrt".</td></tr>
+      <tr><td><code>KFold(n_splits=10, random_state=42)</code></td><td>+ <code>shuffle=True</code></td><td>O scikit-learn novo exige embaralhar para usar <code>random_state</code>.</td></tr>
+      <tr><td><code>ros.fit_sample(X, y)</code></td><td><code>ros.fit_resample(X, y)</code></td><td>Método renomeado no imbalanced-learn.</td></tr>
+      <tr><td><code>RFE(model, 4)</code></td><td><code>RFE(model, n_features_to_select=4)</code></td><td>Agora o parâmetro precisa ser nomeado.</td></tr>
+      <tr><td><code>AgglomerativeClustering(affinity=…)</code></td><td><code>metric=…</code></td><td>Parâmetro renomeado.</td></tr>
+      <tr><td><code>fit(…, early_stopping_rounds=10)</code></td><td>Vai no construtor: <code>XGBClassifier(…, early_stopping_rounds=10)</code></td><td>XGBoost 2+ mudou o lugar do parâmetro.</td></tr>
+      <tr><td><code>dtreeviz.trees.dtreeviz(…)</code></td><td><code>dtreeviz.model(…).view()</code></td><td>dtreeviz 2 mudou a forma de chamar.</td></tr>
+      <tr><td><code>pd.get_dummies(…)</code></td><td><code>pd.get_dummies(…, dtype=int)</code></td><td>O pandas novo cria colunas True/False; alguns gráficos só aceitam números.</td></tr>
+      <tr><td><code>roc_viz.score(…)</code></td><td><code>roc_viz.fit(…)</code> antes do <code>score</code></td><td>Exigência do Yellowbrick novo.</td></tr>
+      <tr><td><code>shap_vals[1]</code></td><td>Uma linha converte o formato novo para o do livro</td><td>O shap novo devolve um único array em vez de uma lista por classe.</td></tr>
+      <tr><td>Mudanças menores</td><td><code>numeric_only=True</code>, <code>x=</code>/<code>y=</code> nomeados no seaborn, <code>add_constant</code> no statsmodels, <code>legend_label</code> no bokeh</td><td>Mudanças de versão do pandas, seaborn, statsmodels e bokeh.</td></tr>
+    </tbody>
+  </table>
+
+</section>
+
+<section class="page-break">
+  <h2>Células que não rodam hoje</h2>
+  <p>Algumas bibliotecas do livro não existem mais para Windows/Python atual. Nessas células o notebook tem uma nota <b>“⚠ Não roda hoje”</b> logo acima, e quase sempre uma alternativa que faz o mesmo.</p>
+  <table>
+    <thead><tr><th style="width:30%">Onde</th><th>O que fazer</th></tr></thead>
+    <tbody>
+      <tr><td>Cap. 7 — <code>fastai</code> (<code>scale_vars</code>, <code>add_datepart</code>)</td><td>O notebook faz o mesmo com scikit-learn e pandas.</td></tr>
+      <tr><td>Cap. 8 — <code>rfpimp.feature_dependence_matrix</code></td><td>Só leitura no livro (código comentado).</td></tr>
+      <tr><td>Cap. 10 — <code>auto-sklearn</code> e <code>TPOT</code></td><td>Só leitura no livro (auto-sklearn é só Linux; TPOT mudou e é lento).</td></tr>
+      <tr><td>Cap. 12 — <code>ClassPredictionError</code></td><td>Gráfico equivalente feito com pandas.</td></tr>
+      <tr><td>Cap. 13 — <code>pdpbox</code></td><td>Mesmo gráfico com <code>PartialDependenceDisplay</code> do scikit-learn.</td></tr>
+      <tr><td>Cap. 17 — <code>scprep</code> e <code>phate.plot</code></td><td>Gráficos equivalentes com matplotlib (o 3D fica parado, sem girar).</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:9.5pt;color:var(--muted)">Os ajustes ficam no arquivo <code>estudos/compat.py</code> e nas próprias células. Testado em 24/10/2026: os 17 notebooks rodam do início ao fim sem erro.</p>
+
+</section>
+
+<!-- ============ ATALHOS E PROBLEMAS ============ -->
+<section class="page-break">
+  <h2>Atalhos do notebook</h2>
+  <table>
+    <thead><tr><th>Ação</th><th>Atalho</th></tr></thead>
+    <tbody>
+      <tr><td>Rodar a célula e ir para a próxima</td><td><kbd>Shift</kbd>+<kbd>Enter</kbd></td></tr>
+      <tr><td>Rodar a célula e ficar nela</td><td><kbd>Ctrl</kbd>+<kbd>Enter</kbd></td></tr>
+      <tr><td>Nova célula abaixo / acima <span style="color:var(--muted)">(fora da edição: aperte <kbd>Esc</kbd> antes)</span></td><td><kbd>B</kbd> / <kbd>A</kbd></td></tr>
+      <tr><td>Transformar em texto (Markdown) / em código</td><td><kbd>M</kbd> / <kbd>Y</kbd></td></tr>
+      <tr><td>Apagar a célula</td><td><kbd>D</kbd> <kbd>D</kbd></td></tr>
+      <tr><td>Ver a ajuda de uma função</td><td>Passe o mouse sobre o nome, ou rode <code>help(nome)</code></td></tr>
+      <tr><td>Reiniciar a memória / rodar tudo</td><td>Botões <b>Restart</b> e <b>Run All</b> na barra do notebook</td></tr>
+    </tbody>
+  </table>
+
+  <h2 style="margin-top:6mm">Quando algo der errado</h2>
+  <table>
+    <thead><tr><th style="width:36%">Problema</th><th>Solução</th></tr></thead>
+    <tbody>
+      <tr><td><code>ModuleNotFoundError</code></td><td>Kernel errado. Canto superior direito → <b>Select Kernel</b> → <b>.venv (Python 3.12)</b>.</td></tr>
+      <tr><td><code>NameError: name 'df' is not defined</code></td><td>Você pulou uma célula. Rode as de cima, ou <b>Restart</b> + <b>Run All</b>.</td></tr>
+      <tr><td><code>No module named 'compat'</code></td><td>A célula <b>Preparação</b> não foi rodada, ou você abriu um <code>chXX</code> (original). Use os cadernos de <code>praticar</code> ou <code>estudos</code>.</td></tr>
+      <tr><td>Número diferente do livro</td><td>Normal: versões novas e sorteios aleatórios. O importante é a ordem de grandeza e a interpretação.</td></tr>
+      <tr><td>Muitos avisos amarelos/vermelhos (<i>Warning</i>)</td><td>Aviso não é erro. Se a célula terminou com ✔, siga em frente.</td></tr>
+      <tr><td>Célula demorando muito (<code>[*]</code>)</td><td>Alguns modelos levam 1–2 min. Se passar de 5 min, botão <b>Interrupt</b> e siga para a próxima seção.</td></tr>
+      <tr><td>Célula com aviso “⚠ Não roda hoje”</td><td>Biblioteca que não existe mais para Windows/Python atual. Leia no livro e siga em frente — o notebook mostra a alternativa quando existe.</td></tr>
+    </tbody>
+  </table>
+
+  <footer>Guia de estudos · Machine Learning – Guia de Referência Rápida (Matt Harrison) · VS Code + Jupyter</footer>
+</section>
+
+</body>
+</html>

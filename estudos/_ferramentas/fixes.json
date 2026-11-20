@@ -1,0 +1,194 @@
+{
+ "_global": [
+  [
+   "\"max_features\": \"auto\",",
+   "\"max_features\": \"sqrt\",  # \"auto\" foi removido do scikit-learn"
+  ],
+  [
+   ".pipe(pd.get_dummies, drop_first=True)",
+   ".pipe(pd.get_dummies, drop_first=True, dtype=int)"
+  ],
+  [
+   "yellowbrick.features.importances",
+   "yellowbrick.model_selection"
+  ],
+  [
+   "sns.scatterplot(\n    \"PC1\",\n    \"PC2\",",
+   "sns.scatterplot(\n    x=\"PC1\",\n    y=\"PC2\","
+  ],
+  [
+   "agg_df.corr()",
+   "agg_df.corr(numeric_only=True)"
+  ],
+  [
+   "roc_viz.score(X_test, y_test)",
+   "roc_viz.fit(X_train, y_train)  # o Yellowbrick novo exige fit antes do score\nroc_viz.score(X_test, y_test)"
+  ],
+  [
+   "n_splits=10, random_state=42",
+   "n_splits=10, shuffle=True, random_state=42"
+  ],
+  [
+   ".fit_sample(",
+   ".fit_resample("
+  ],
+  [
+   "affinity=\"euclidean\"",
+   "metric=\"euclidean\""
+  ],
+  [
+   "RFE(model, 4)",
+   "RFE(model, n_features_to_select=4)"
+  ],
+  [
+   "jointplot(\n    \"age\", \"fare\", data=",
+   "jointplot(\n    x=\"age\", y=\"fare\", data="
+  ],
+  [
+   ".agg(\"min,max,mean,sum\".split(\",\"))",
+   "[df.select_dtypes(\"number\").columns]  # só colunas numéricas (pandas 2)\n     .agg([\"min\", \"max\", \"mean\", \"sum\"])"
+  ],
+  [
+   "import dtreeviz.trees\n",
+   "import dtreeviz\n"
+  ],
+  [
+   "dtreeviz.trees.dtreeviz(",
+   "dtreeviz.model("
+  ],
+  [
+   "xgb.XGBClassifier(random_state=42)",
+   "xgb.XGBClassifier(random_state=42, early_stopping_rounds=10)"
+  ],
+  [
+   "    early_stopping_rounds=10,\n",
+   ""
+  ]
+ ],
+ "6:25": {
+  "replace": [
+   [
+    "new_df = X.copy()",
+    "new_df = X.astype(float)  # radviz não aceita colunas True/False"
+   ]
+  ]
+ },
+ "7:5": {
+  "note": "> ⚠️ **Não roda hoje:** a função `scale_vars` era do **fastai v1**, que não existe mais. A célula abaixo faz o mesmo (padronizar média 0 e desvio 1) com o `StandardScaler` do scikit-learn.",
+  "source": "X3 = X2.copy()\nfrom sklearn.preprocessing import StandardScaler\nX3[X3.columns] = StandardScaler().fit_transform(X3)\nX3.std()\nX3.mean()\n\n# Código original do livro (fastai v1):\n# X3 = X2.copy()\n# from fastai.structured import scale_vars\n# scale_vars(X3, mapper=None)"
+ },
+ "7:21": {
+  "note": "> ⚠️ **Não roda hoje:** `add_datepart` era do **fastai v1**. Abaixo, o mesmo resultado com pandas (`.dt`).",
+  "source": "dates = pd.DataFrame(\n    {\n        \"A\": pd.to_datetime(\n            [\"9/17/2001\", \"Jan 1, 2002\"], format=\"mixed\"\n        )\n    }\n)\nd = dates.A.dt\ndates = dates.assign(\n    AYear=d.year, AMonth=d.month, AWeek=d.isocalendar().week,\n    ADay=d.day, ADayofweek=d.dayofweek, ADayofyear=d.dayofyear,\n    AIs_month_end=d.is_month_end, AIs_month_start=d.is_month_start,\n    AIs_quarter_end=d.is_quarter_end, AIs_quarter_start=d.is_quarter_start,\n    AIs_year_end=d.is_year_end, AIs_year_start=d.is_year_start,\n    AElapsed=dates.A.astype('int64') // 10**9,\n).drop(columns='A')\ndates.T"
+ },
+ "10:11": {
+  "note": "> ⚠️ **Ajuste para as bibliotecas atuais:** o **dtreeviz 2** mudou a forma de chamar: agora é `dtreeviz.model(...)` e o desenho sai com `.view()`.",
+  "source": "import dtreeviz\nviz = dtreeviz.model(\n    dt,\n    X,\n    y,\n    target_name=\"survived\",\n    feature_names=X.columns,\n    class_names=[\"died\", \"survived\"],\n)\nviz.view()"
+ },
+ "14:13": {
+  "note": "> ⚠️ **Ajuste para as bibliotecas atuais:** o **dtreeviz 2** mudou a forma de chamar: agora é `dtreeviz.model(...)` e o desenho sai com `.view()`.",
+  "source": "import dtreeviz\ndtr3 = DecisionTreeRegressor(max_depth=2)\ndtr3.fit(bos_X_train, bos_y_train)\nviz = dtreeviz.model(\n    dtr3,\n    bos_X,\n    bos_y,\n    target_name=\"price\",\n    feature_names=bos_X.columns,\n)\nviz.view()"
+ },
+ "5:3": {
+  "note": "> ⚠️ **Ajuste para as bibliotecas atuais:** o pyjanitor mudou os parâmetros do `coalesce`.",
+  "source": "jn.coalesce(\n    Xbad,\n    \"A\",\n    \"  sales numbers \",\n    target_column_name=\"val\",\n)"
+ },
+ "8:4": {
+  "note": "> ⚠️ **Não roda hoje:** `rfpimp.feature_dependence_matrix` quebrou com o scikit-learn novo. Leia no livro; código comentado.",
+  "source": "# import rfpimp\n# rfpimp.plot_dependence_heatmap(\n#     rfpimp.feature_dependence_matrix(X_train),\n#     value_fontsize=12,\n#     label_fontsize=14,\n#     figsize=(8, 8)\n# )"
+ },
+ "10:33": {
+  "note": "> ⚠️ **Ajuste para as bibliotecas atuais:** `median()` agora precisa de `numeric_only=True` quando há colunas de texto.",
+  "replace": [
+   [
+    "cat_df.fillna(cat_df.median())",
+    "cat_df.fillna(cat_df.median(numeric_only=True))"
+   ]
+  ]
+ },
+ "10:35": {
+  "note": "> ⚠️ **Não roda hoje:** o **auto-sklearn** só funciona no Linux. Leia no livro; o código fica comentado como referência.",
+  "source": "# from autosklearn.classification import (\n#     AutoSklearnClassifier,\n# )\n# asc = AutoSklearnClassifier(\n#     time_left_for_this_task=240\n# )\n# asc.fit(X_train, y_train)\n# asc.score(X_test, y_test)"
+ },
+ "10:36": {
+  "note": "> ⚠️ **Não roda hoje:** o **TPOT** mudou completamente desde o livro e é muito lento. Leia no livro; código comentado.",
+  "source": "# from tpot import TPOTClassifier\n# tc = TPOTClassifier(generations=2)\n# tc.fit(X_train, y_train)\n# tc.score(X_test, y_test)"
+ },
+ "10:37": {
+  "source": "# tc.export(\"tpot_exported_pipeline.py\")"
+ },
+ "13:11": {
+  "note": "> ⚠️ **Não roda hoje:** o **pdpbox** não instala mais. O scikit-learn tem o mesmo gráfico de dependência parcial: `PartialDependenceDisplay`.",
+  "source": "from sklearn.inspection import PartialDependenceDisplay\nfeat_name = \"age\"\nfig, ax = plt.subplots(figsize=(6, 4))\nPartialDependenceDisplay.from_estimator(\n    rf5, X.astype(float), [feat_name], kind=\"both\", ax=ax\n)"
+ },
+ "13:12": {
+  "source": "features = [\"fare\", \"sex_male\"]\nfig, ax = plt.subplots(figsize=(6, 5))\nPartialDependenceDisplay.from_estimator(\n    rf5, X.astype(float), [tuple(features)], ax=ax\n)"
+ },
+ "12:18": {
+  "note": "> ⚠️ **Não roda hoje:** o `ClassPredictionError` do Yellowbrick 1.5 quebrou com o scikit-learn novo. Abaixo, o mesmo gráfico (acertos e erros por classe) feito com pandas.",
+  "source": "fig, ax = plt.subplots(figsize=(6, 3))\npd.crosstab(\n    pd.Series(y_test.values, name=\"real\").map({0: \"died\", 1: \"survived\"}),\n    pd.Series(dt.predict(X_test), name=\"previsto\").map({0: \"died\", 1: \"survived\"}),\n).plot.bar(stacked=True, ax=ax)\nax.set_title(\"Class Prediction Error\")\n\n# Código original do livro:\n# cpe_viz = ClassPredictionError(\n#     dt, classes=[\"died\", \"survived\"]\n# )\n# cpe_viz.score(X_test, y_test)\n# cpe_viz.poof()"
+ },
+ "13:15": {
+  "note": "> ⚠️ **Ajuste para as bibliotecas atuais:** o **shap** novo devolve um único array (linhas × colunas × classes). A linha extra abaixo volta ao formato do livro (uma lista por classe).",
+  "replace": [
+   [
+    "shap_vals = s.shap_values(X_test)\n",
+    "shap_vals = s.shap_values(X_test)\nif getattr(shap_vals, 'ndim', 0) == 3:  # formato novo -> formato do livro\n    shap_vals = [shap_vals[:, :, i] for i in range(shap_vals.shape[2])]\n"
+   ]
+  ]
+ },
+ "15:8": {
+  "note": "> ⚠️ **Ajuste para as bibliotecas atuais:** o `statsmodels` agora exige uma coluna constante no teste de Breusch-Pagan (`add_constant`).",
+  "replace": [
+   [
+    "hb = sms.het_breuschpagan(resids, bos_X_test)",
+    "import statsmodels.api as sm\nhb = sms.het_breuschpagan(resids, sm.add_constant(bos_X_test))"
+   ]
+  ]
+ },
+ "17:13": {
+  "replace": [
+   [
+    "circle_kwargs[\"legend\"] = legend",
+    "circle_kwargs[\"legend_label\"] = legend"
+   ],
+   [
+    "fig.circle(",
+    "fig.scatter("
+   ],
+   [
+    "        tools=[",
+    "        tools=["
+   ]
+  ]
+ },
+ "17:15": {
+  "note": "> ⚠️ **Não roda hoje:** o **scprep** exige um pandas antigo. Abaixo, um gráfico 3D equivalente (parado) com matplotlib.",
+  "source": "fig = plt.figure(figsize=(8, 6))\nax = fig.add_subplot(projection=\"3d\")\nax.scatter(X_pca[:, 0], X_pca[:, 1], X_pca[:, 2], c=y, cmap=\"Spectral\")\nax.set(xlabel=\"Principal Component 1\", ylabel=\"Principal Component 2\", zlabel=\"Principal Component 3\")"
+ },
+ "17:27": {
+  "note": "> ⚠️ **Ajuste para as bibliotecas atuais:** `phate.plot.scatter2d` saiu do PHATE 2; o gráfico abaixo faz o mesmo com matplotlib.",
+  "source": "fig, ax = plt.subplots(figsize=(6, 4))\nax.scatter(X_phate[:, 0], X_phate[:, 1], c=y, alpha=0.5, cmap=\"Spectral\")"
+ },
+ "19:10": {
+  "note": "> ⚠️ **Ajuste para as bibliotecas atuais:** no livro esta célula usa um `X` que não existe neste capítulo; trocado por `df`.",
+  "source": "df.isna().any()"
+ },
+ "19:11": {
+  "note": "> ⚠️ **Ajuste para as bibliotecas atuais:** erro de digitação do livro: a pipeline se chama `spca_pipe`.",
+  "replace": [
+   [
+    "X_pca = pca_pipe.fit_transform",
+    "X_pca = spca_pipe.fit_transform"
+   ]
+  ]
+ },
+ "19:12": {
+  "replace": [
+   [
+    "pca_pipe.named_steps",
+    "spca_pipe.named_steps"
+   ]
+  ]
+ }
+}

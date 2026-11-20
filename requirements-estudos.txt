@@ -1,0 +1,54 @@
+# Ambiente de estudos do livro "Machine Learning – Guia de Referência Rápida" (Matt Harrison)
+# Python 3.12 (.venv criado com uv). Bibliotecas que não rodam mais no Windows/Python atual
+# ficaram de fora: auto-sklearn (só Linux), fastai v1, tpot antigo, pdpbox.
+
+# Jupyter no VS Code
+ipykernel
+pip                      # o VS Code exige pip no ambiente para rodar notebooks (uv não instala por padrão)
+
+# Python 3.12 não traz mais distutils/pkg_resources (yellowbrick e ydata-profiling usam)
+setuptools<81
+
+# Base
+numpy
+pandas
+scipy
+matplotlib
+seaborn
+scikit-learn
+statsmodels
+
+# Leitura dos dados (Titanic .xls, fir.xlsx)
+xlrd
+openpyxl
+
+# Visualização de modelos e dados
+yellowbrick
+missingno
+ydata-profiling          # sucessor do pandas_profiling (cap. 3)
+
+# Limpeza e pré-processamento
+pyjanitor<0.32           # 0.32+ exige pandas 3
+category_encoders
+imbalanced-learn         # imblearn (cap. 9)
+mlxtend
+
+# Modelos
+xgboost
+lightgbm
+catboost
+xgbfir
+
+# Explicação de modelos e importância de atributos
+shap
+lime
+treeinterpreter
+rfpimp
+dtreeviz
+pydotplus
+
+# Redução de dimensionalidade e clusters (cap. 17 e 18)
+umap-learn
+phate
+bokeh
+ipywidgets               # relatório do ydata-profiling (cap. 3)

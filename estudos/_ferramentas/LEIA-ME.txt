@@ -1,0 +1,15 @@
+Scripts que geram os notebooks da pasta estudos a partir dos originais chXX.ipynb.
+Não é preciso rodar nada disto para estudar.
+
+Regerar (no terminal, dentro de C:\estudos\ml_pocket_reference):
+  python estudos\_ferramentas\fixes.py estudos\_ferramentas\fixes.json
+  python estudos\_ferramentas\build_nbs.py . estudos\_ferramentas\fixes.json
+Testar todos (usa o .venv):
+  cd estudos
+  ..\.venv\Scripts\python.exe _ferramentas\run_nbs.py .
+
+ATENÇÃO: regerar apaga as anotações que você fez nos notebooks capXX.
+
+Cadernos de prática (pasta praticar), um por capítulo:
+  python estudos\_ferramentas\gerar_praticar.py . estudos\_ferramentas\fixes.json estudos\_ferramentas\secoes.json
+  (Não sobrescreve cadernos que já existem: o que você escreveu fica.)
