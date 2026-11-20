@@ -1,4 +1,4 @@
-# 🤖 Estudos — *Machine Learning: Guia de Referência Rápida* (Matt Harrison) · ✅ concluído
+# Estudos — *Machine Learning: Guia de Referência Rápida* (Matt Harrison) · concluído
 
 > **A melhor forma de estudar um livro técnico é ler e praticar ao mesmo tempo.**
 > Leia um trecho, feche o livro e escreva o código com as próprias mãos. Só depois compare com o original.
@@ -6,14 +6,14 @@
 Este repositório registra como estudei *Machine Learning – Guia de Referência Rápida* (O'Reilly), capítulos 3 a 19, no **VS Code + Jupyter**.
 Os notebooks oficiais do autor foram escritos para versões antigas do pandas e do scikit-learn e já não rodavam. O que está aqui é **o trabalho de atualização**: as correções e as ferramentas que fazem os notebooks do livro rodarem nas bibliotecas atuais e geram cadernos de prática.
 
-## 🔁 O método
+## O método
 
 1. **Ler** a seção indicada no PDF (cada caderno mostra a página).
 2. **Praticar** num caderno com as células de código **vazias**, escrevendo o código sem olhar.
 3. **Conferir** com o notebook do capítulo já corrigido para as bibliotecas atuais.
 4. **Anotar** com as próprias palavras e registrar o progresso.
 
-## 🛠️ Melhorias no código do livro
+## Melhorias no código do livro
 
 - `estudos/compat.py`: camada de compatibilidade que carrega os dados locais (o link original do Titanic deixou de funcionar e o dataset Boston saiu do scikit-learn) e ajusta APIs que mudaram.
 - `estudos/_ferramentas/fixes.json` + `fixes.py`: correções célula a célula nos notebooks originais, para APIs removidas ou renomeadas no pandas 2.x, no scikit-learn 1.x e em outras bibliotecas.
@@ -22,7 +22,7 @@ Os notebooks oficiais do autor foram escritos para versões antigas do pandas e 
 - `run_nbs.py`: executa todos os capítulos. **17 de 17 notebooks rodam sem erro** com Python 3.12.
 - [Guia de Estudos (PDF)](estudos/Guia_de_Estudos_ML.pdf) para iniciantes.
 
-## 📁 O que está aqui (e o que não está)
+## O que está aqui (e o que não está)
 
 | Está aqui | Fica só na minha máquina |
 |---|---|
@@ -30,7 +30,7 @@ Os notebooks oficiais do autor foram escritos para versões antigas do pandas e 
 
 O código original está em [mattharrison/ml_pocket_reference](https://github.com/mattharrison/ml_pocket_reference), que não tem licença aberta. Por isso os notebooks derivados dele não são republicados aqui. Para reproduzir: clone o repositório do autor, copie para dentro dele a pasta `estudos/` daqui e siga `estudos/_ferramentas/LEIA-ME.txt`.
 
-## ⚖️ Direitos autorais
+## Direitos autorais
 
 O livro e os notebooks do autor **não** estão neste repositório. Para estudar, use a sua própria cópia.
 As ferramentas, as correções e o guia são autorais e estão sob licença [MIT](LICENSE).

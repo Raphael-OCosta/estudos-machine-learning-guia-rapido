@@ -2,8 +2,8 @@
 import json
 import sys
 
-AVISO = "> ⚠️ **Ajuste para as bibliotecas atuais:** "
-NAO_RODA = "> ⚠️ **Não roda hoje:** "
+AVISO = "> **Ajuste para as bibliotecas atuais:** "
+NAO_RODA = "> **Não roda hoje:** "
 
 
 def comentado(src):

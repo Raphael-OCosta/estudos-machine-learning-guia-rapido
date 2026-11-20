@@ -64,7 +64,7 @@
   .steps > li::before { content: counter(s); position: absolute; left: 0; top: 0.3mm; width: 7mm; height: 7mm; border-radius: 50%; background: var(--brand-soft); color: var(--brand); font-weight: 700; font-size: 10pt; text-align: center; line-height: 7mm; }
   .steps ul { margin: 1mm 0 0; padding-left: 5mm; }
   .see { display: block; margin-top: 1mm; color: var(--green); font-size: 10pt; }
-  .see::before { content: "✔ Você deve ver: "; font-weight: 700; }
+  .see::before { content: "Você deve ver: "; font-weight: 700; }
 
   .step-head { display: flex; align-items: center; gap: 3mm; margin: 6mm 0 2mm; break-after: avoid; }
   .step-head .badge { background: var(--brand); color: #fff; font-weight: 700; border-radius: 6px; padding: 1mm 3mm; font-size: 11pt; }
@@ -88,7 +88,7 @@
 
   .checklist { list-style: none; padding: 0; }
   .checklist li { padding-left: 7mm; position: relative; margin-bottom: 1.5mm; }
-  .checklist li::before { content: "☐"; position: absolute; left: 0; color: var(--brand); font-size: 12pt; line-height: 1.2; }
+  .checklist li::before { content: ""; position: absolute; left: 0; color: var(--brand); font-size: 12pt; line-height: 1.2; }
   footer { color: var(--muted); font-size: 9pt; text-align: center; margin-top: 8mm; }
 </style>
 
@@ -136,12 +136,12 @@
   <p>No livro de SQL você escrevia consultas em arquivos <code>.sql</code>. Agora o código é <b>Python</b> e roda em <b>notebooks</b>: arquivos divididos em <i>células</i>, que você executa uma por vez e vê o resultado logo abaixo, inclusive gráficos.</p>
 
   <div class="cards">
-    <div class="card"><div class="t">📘 O livro (PDF)</div>Explica cada técnica e mostra o código. É uma <b>referência</b>: pouca teoria, muitos exemplos.<div class="a">É o professor.</div></div>
-    <div class="card"><div class="t">✍️ Pasta <code>praticar</code></div><b>Onde você escreve.</b> Um caderno por capítulo com a preparação pronta e, para cada seção do livro, um título com a página do PDF e uma célula vazia.<div class="a">É o seu caderno.</div></div>
-    <div class="card"><div class="t">📂 Pasta <code>estudos</code></div><b>Consulta:</b> o código do livro completo, já ajustado para rodar hoje. Use quando travar.<div class="a">É a resolução comentada.</div></div>
-    <div class="card"><div class="t">🗂️ Arquivos <code>ch03…ch19</code></div>Os notebooks <b>originais do autor</b>, com as saídas dele. Não rode: servem para comparar o seu resultado com o dele.<div class="a">É o gabarito (só para olhar).</div></div>
-    <div class="card"><div class="t">🐍 Ambiente <code>.venv</code></div>Um Python 3.12 só deste curso, com todas as bibliotecas do livro já instaladas.<div class="a">É a caixa de ferramentas.</div></div>
-    <div class="card"><div class="t">📊 Pasta <code>dados</code></div><code>titanic3.xls</code> (passageiros do Titanic, cap. 3–13 e 17–19) e <code>boston.csv</code> (preço de casas, cap. 14–16).<div class="a">É o material da aula.</div></div>
+    <div class="card"><div class="t">O livro (PDF)</div>Explica cada técnica e mostra o código. É uma <b>referência</b>: pouca teoria, muitos exemplos.<div class="a">É o professor.</div></div>
+    <div class="card"><div class="t">Pasta <code>praticar</code></div><b>Onde você escreve.</b> Um caderno por capítulo com a preparação pronta e, para cada seção do livro, um título com a página do PDF e uma célula vazia.<div class="a">É o seu caderno.</div></div>
+    <div class="card"><div class="t">Pasta <code>estudos</code></div><b>Consulta:</b> o código do livro completo, já ajustado para rodar hoje. Use quando travar.<div class="a">É a resolução comentada.</div></div>
+    <div class="card"><div class="t">Arquivos <code>ch03…ch19</code></div>Os notebooks <b>originais do autor</b>, com as saídas dele. Não rode: servem para comparar o seu resultado com o dele.<div class="a">É o gabarito (só para olhar).</div></div>
+    <div class="card"><div class="t">Ambiente <code>.venv</code></div>Um Python 3.12 só deste curso, com todas as bibliotecas do livro já instaladas.<div class="a">É a caixa de ferramentas.</div></div>
+    <div class="card"><div class="t">Pasta <code>dados</code></div><code>titanic3.xls</code> (passageiros do Titanic, cap. 3–13 e 17–19) e <code>boston.csv</code> (preço de casas, cap. 14–16).<div class="a">É o material da aula.</div></div>
   </div>
 
   <div class="note info"><span class="h">As principais bibliotecas (você vai ver estes nomes o tempo todo)</span>
@@ -180,14 +180,14 @@
       <ul><li>Se a lista não mostrar o <code>.venv</code>, aperte <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>P</kbd> → <code>Reload Window</code> e tente de novo.</li></ul>
       <span class="see">no canto superior direito, <b>.venv (Python 3.12.x)</b>.</span></li>
   </ol>
-  <div class="note warn"><span class="h">⚠ O kernel certo é o que faz tudo funcionar</span>
+  <div class="note warn"><span class="h">O kernel certo é o que faz tudo funcionar</span>
     Se escolher outro Python (por exemplo o 3.13 do computador), as bibliotecas do livro não vão estar lá e aparece <code>ModuleNotFoundError</code>. O VS Code lembra a escolha: você só faz isso uma vez por notebook.
   </div>
 
   <div class="step-head"><span class="badge">1.3</span><h3>Rodar as primeiras células</h3></div>
   <ol class="steps">
     <li>Clique na célula de código da seção <b>Preparação</b> (começa com <code>import sys</code>) e aperte <kbd>Shift</kbd>+<kbd>Enter</kbd>.
-      <span class="see">um ✔ verde à esquerda da célula e o cursor pulando para a próxima.</span></li>
+      <span class="see">um verde à esquerda da célula e o cursor pulando para a próxima.</span></li>
     <li>Na seção <b>Importações · PDF p. 24</b>, digite na célula vazia as importações do livro (<code>import pandas as pd</code> etc.) e rode.</li>
     <li>Na seção <b>Colete os dados · PDF p. 27</b>, digite <code>df = pd.read_excel(url)</code> e, na linha de baixo, <code>df.shape</code>. Rode.
       <span class="see"><code>(1309, 14)</code> — 1.309 passageiros e 14 colunas.</span></li>
@@ -215,11 +215,11 @@
     <li>Salve com <kbd>Ctrl</kbd>+<kbd>S</kbd>.</li>
   </ol>
 
-  <div class="note tip"><span class="h">✔ Pronto para começar? Confira:</span>
+  <div class="note tip"><span class="h">Pronto para começar? Confira:</span>
     <ul class="checklist" style="margin:1mm 0 0">
       <li>A pasta abre sem <b>Restricted Mode</b>.</li>
       <li>O notebook mostra <b>.venv (Python 3.12)</b> no canto superior direito.</li>
-      <li>A célula <b>Preparação</b> rodou com ✔ verde.</li>
+      <li>A célula <b>Preparação</b> rodou com verde.</li>
       <li><code>df.shape</code> mostrou <code>(1309, 14)</code>.</li>
     </ul>
   </div>
@@ -334,7 +334,7 @@ df[df.age &lt; 10].shape              <span class="c"># WHERE age &lt; 10</span>
 
 <section class="page-break">
   <h2>Células que não rodam hoje</h2>
-  <p>Algumas bibliotecas do livro não existem mais para Windows/Python atual. Nessas células o notebook tem uma nota <b>“⚠ Não roda hoje”</b> logo acima, e quase sempre uma alternativa que faz o mesmo.</p>
+  <p>Algumas bibliotecas do livro não existem mais para Windows/Python atual. Nessas células o notebook tem uma nota <b>“Não roda hoje”</b> logo acima, e quase sempre uma alternativa que faz o mesmo.</p>
   <table>
     <thead><tr><th style="width:30%">Onde</th><th>O que fazer</th></tr></thead>
     <tbody>
@@ -374,9 +374,9 @@ df[df.age &lt; 10].shape              <span class="c"># WHERE age &lt; 10</span>
       <tr><td><code>NameError: name 'df' is not defined</code></td><td>Você pulou uma célula. Rode as de cima, ou <b>Restart</b> + <b>Run All</b>.</td></tr>
       <tr><td><code>No module named 'compat'</code></td><td>A célula <b>Preparação</b> não foi rodada, ou você abriu um <code>chXX</code> (original). Use os cadernos de <code>praticar</code> ou <code>estudos</code>.</td></tr>
       <tr><td>Número diferente do livro</td><td>Normal: versões novas e sorteios aleatórios. O importante é a ordem de grandeza e a interpretação.</td></tr>
-      <tr><td>Muitos avisos amarelos/vermelhos (<i>Warning</i>)</td><td>Aviso não é erro. Se a célula terminou com ✔, siga em frente.</td></tr>
+      <tr><td>Muitos avisos amarelos/vermelhos (<i>Warning</i>)</td><td>Aviso não é erro. Se a célula terminou com , siga em frente.</td></tr>
       <tr><td>Célula demorando muito (<code>[*]</code>)</td><td>Alguns modelos levam 1–2 min. Se passar de 5 min, botão <b>Interrupt</b> e siga para a próxima seção.</td></tr>
-      <tr><td>Célula com aviso “⚠ Não roda hoje”</td><td>Biblioteca que não existe mais para Windows/Python atual. Leia no livro e siga em frente — o notebook mostra a alternativa quando existe.</td></tr>
+      <tr><td>Célula com aviso “Não roda hoje”</td><td>Biblioteca que não existe mais para Windows/Python atual. Leia no livro e siga em frente — o notebook mostra a alternativa quando existe.</td></tr>
     </tbody>
   </table>
 

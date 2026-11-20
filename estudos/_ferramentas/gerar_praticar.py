@@ -30,7 +30,7 @@ CORTAR = {4: ["df.isnull().mean() * 100"]}
 # A partir deste trecho a célula já é exercício
 CORTAR_DEPOIS = {11: "fig, ax = plt.subplots(figsize=(6, 4))\nvc_viz"}
 
-NAO_RODA = {(10, "TPOT"): "⚠️ O TPOT não roda hoje (veja o guia). Só leitura."}
+NAO_RODA = {(10, "TPOT"): "O TPOT não roda hoje (veja o guia). Só leitura."}
 
 
 def fix(ch, i, s):
@@ -83,7 +83,7 @@ for n in range(3, 20):
                     + ". Já vem pronta para você focar no assunto do capítulo.")
 
     cells = [
-        md(f"# Capítulo {n} — {titulo} · ✍️ prática\n\n"
+        md(f"# Capítulo {n} — {titulo} · prática\n\n"
            f"**Livro:** começa na página **{PAG[n]}** do PDF.\n\n"
            "**Como usar:**\n"
            "1. Rode a célula **Preparação** abaixo (`Shift+Enter`).\n"
@@ -100,7 +100,7 @@ for n in range(3, 20):
         if (n, sec) in NAO_RODA:
             texto += f"\n\n> {NAO_RODA[(n, sec)]}"
         cells += [md(texto), code()]
-    cells.append(md("## 📝 Minhas anotações do capítulo\n\n- Aprendi:\n- Dúvidas:\n"))
+    cells.append(md("## Minhas anotações do capítulo\n\n- Aprendi:\n- Dúvidas:\n"))
 
     nb = {"cells": cells, "metadata": {"kernelspec": {"name": "python3", "display_name": "Python 3 (.venv)", "language": "python"},
                                         "language_info": {"name": "python"}}, "nbformat": 4, "nbformat_minor": 5}
